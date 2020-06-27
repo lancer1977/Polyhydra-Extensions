@@ -8,6 +8,11 @@ namespace PolyhydraGames.Extensions
 {
     public static class Collections
     {
+        public static bool IsAny<T>(this T item, params T[] options)
+        {
+            return options.Contains(item);
+        }
+
         public static bool ContainsAny<T>(this IEnumerable<T> set1, IEnumerable<T> set2)
         {
             if (set2 == null)
