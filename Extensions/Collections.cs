@@ -222,5 +222,19 @@ namespace PolyhydraGames.Extensions
             var index = DiceRoll.RollRandom(0, length - 1);
             return items[index];
         }
+
+        public static List<T> GetRandomizedList<T>(IEnumerable<T> sourceItems)
+        {
+            var sourceList = sourceItems.ToList(); //make a copy
+            var returnList = new List<T>();
+            while (sourceList.Any())
+            {
+                var item = sourceList.RandomItem();
+                sourceList.Remove(item);
+                returnList.Add(item);
+            }
+
+            return returnList;
+        }
     }
 }
