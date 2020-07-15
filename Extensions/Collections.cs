@@ -223,7 +223,7 @@ namespace PolyhydraGames.Extensions
             return items[index];
         }
 
-        public static List<T> GetRandomizedList<T>(IEnumerable<T> sourceItems)
+        public static List<T> GetRandomizedList<T>(this IEnumerable<T> sourceItems)
         {
             var sourceList = sourceItems.ToList(); //make a copy
             var returnList = new List<T>();
