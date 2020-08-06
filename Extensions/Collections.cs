@@ -116,20 +116,20 @@ namespace PolyhydraGames.Extensions
             foreach (var item in items)
                 list.AddUnique(item);
         }
-                public static void AddRange<T>(this ObservableCollection<T> list, IEnumerable<T> items)
+        public static void AddRange<T>(this ObservableCollection<T> list, IEnumerable<T> items)
         {
             foreach (var item in items)
                 list.Add(item);
         }
-              public static void AddRangeUnique<T>(this ObservableCollection<T> list, IEnumerable<T> items)
+        public static void AddRangeUnique<T>(this ObservableCollection<T> list, IEnumerable<T> items)
         {
             foreach (var item in items)
                 list.AddUnique(item);
         }
-              public static void RemoveAll<T>(this ObservableCollection<T> list, Predicate<T> rule)
-              {
-                    (from item in list where rule(item) select item).ForEach(i=>list.Remove(i)); 
-              }
+        public static void RemoveAll<T>(this ObservableCollection<T> list, Predicate<T> rule)
+        {
+            (from item in list where rule(item) select item).ForEach(i => list.Remove(i));
+        }
         public static void Update<T, TE>(this Dictionary<T, TE> dict, T key, TE value)
         {
             if (dict.ContainsKey(key))
@@ -205,7 +205,7 @@ namespace PolyhydraGames.Extensions
                 action(item);
             }
         }
-        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> items )
+        public static ObservableCollection<T> ToObservableCollection<T>(this IEnumerable<T> items)
         {
             var collection = new ObservableCollection<T>();
             foreach (var item in items)
@@ -235,6 +235,36 @@ namespace PolyhydraGames.Extensions
             }
 
             return returnList;
+        }
+
+        public static void AddUnique<T>(this IList<T> list, T item)
+        {
+            if (list.Contains(item)) return;
+            list.Add(item);
+        }
+
+        public static bool RemoveTry<T>(this IList<T> list, T item)
+        {
+            return list.Remove(item);
+        }
+
+        public static void AddRangeUnique<T>(this IList<T> list, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+                list.AddUnique(item);
+        }
+
+        public static void RemoveRangeTry<T>(this IList<T> list, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+                list.RemoveTry(item);
+        }
+
+        public static void Replace<T>(this IList<T> currentList, T existing, T replacement)
+        {
+            if (currentList.Contains(existing))
+                currentList.Remove(existing);
+            currentList.Add(replacement);
         }
     }
 }

@@ -4,9 +4,7 @@ using System.Linq;
 
 namespace PolyhydraGames.Extensions
 {
-    public enum Test
-    {
-    }
+ 
     public static class EnumExtensions
     {
 
@@ -162,9 +160,6 @@ namespace PolyhydraGames.Extensions
             return enumList.ToArray();
         }
 
-        public static bool IsAny<T>(this T item, params T[] options)
-        {
-            return options.Contains(item);
-        }
+
     }
 }
