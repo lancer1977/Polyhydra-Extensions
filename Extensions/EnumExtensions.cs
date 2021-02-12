@@ -44,19 +44,6 @@ namespace PolyhydraGames.Extensions
 
             return outVal;
         }
-        //public static T ToEnum<T>(this object value)
-        //{
-        //    if (value == null) return (T)Enum.ToObject(typeof(T), 0); 
-        //    if (value is int num)
-        //    {
-        //        num.ToEnum<T>();
-        //    }
-        //    else if(value is string stringVal)
-        //    {
-        //        return stringVal.ToEnumFromWord<T>(); 
-        //    }
-        //    return (T)Enum.ToObject(typeof(T), 0);
-        //}
 
  
         public static bool EnumStringCompare<T>(T enumItem, string value)
