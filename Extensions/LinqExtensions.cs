@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -14,6 +15,13 @@ namespace PolyhydraGames.Extensions
         }
 
         public static T RandomFirstOrDefault<T>(this IQueryable<T> q)
+        {
+            return q.Skip(_random.Next(q.Count())).FirstOrDefault();
+        }
+
+ 
+
+        public static T RandomFirstOrDefault<T>(this IList<T> q)
         {
             return q.Skip(_random.Next(q.Count())).FirstOrDefault();
         }

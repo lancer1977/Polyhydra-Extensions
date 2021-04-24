@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>PolyhydraGames.Extensions</AssemblyName>
     <RootNamespace>PolyhydraGames.Extensions</RootNamespace>
+    <ReleaseVersion>2.1.0.8</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

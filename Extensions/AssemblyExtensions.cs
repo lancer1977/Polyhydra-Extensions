@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -37,6 +38,23 @@ namespace PolyhydraGames.Extensions
         public static string GetAssemblyName(this Type type)
         {
             return type.GetAssembly().GetName().Name;
+        }
+
+        public static IList<Type> GetTypesEndingWith(this Assembly[] assembly, string name)
+        {
+            var pages = new List<Type>();
+            foreach (var item in assembly)
+            {
+                pages.AddRange(item.CreatableTypes().EndingWith(name));
+            }
+            return pages;
+        }
+
+        public static IList<Type> GetTypesEndingWith(this Assembly assembly, string name)
+        {
+            var pages = new List<Type>();
+            pages.AddRange(assembly.CreatableTypes().EndingWith(name));
+            return pages;
         }
     }
 }
