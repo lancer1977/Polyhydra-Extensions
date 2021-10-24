@@ -50,6 +50,13 @@ namespace PolyhydraGames.Extensions
             return pages;
         }
 
+        public static string[] GetResources(this Assembly assembly)
+        {
+
+            string[] resources = assembly.GetManifestResourceNames();
+            return resources;
+        }
+
         public static IList<Type> GetTypesEndingWith(this Assembly assembly, string name)
         {
             var pages = new List<Type>();
