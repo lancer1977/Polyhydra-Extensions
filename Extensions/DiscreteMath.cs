@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace PolyhydraGames.Extensions
 {
+
     public static class DiscreteMath
     {
         //p(5,2)
