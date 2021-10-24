@@ -27,5 +27,10 @@ namespace PolyhydraGames.Extensions
         {
             return Math.Min(max, Math.Max(self, min));
         }
+
+          public static int Squared(this int val)
+        {
+            return val * val;
+        }
     }
 }

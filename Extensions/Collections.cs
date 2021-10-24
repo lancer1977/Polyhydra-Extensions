@@ -281,5 +281,10 @@ namespace PolyhydraGames.Extensions
                 currentList.Remove(existing);
             currentList.Add(replacement);
         }
+ 
+        public static string ToCodedArray(this IEnumerable<string> items, string joinText = "#")
+        {
+            return string.Join(joinText, items);
+        }
     }
 }
