@@ -69,7 +69,7 @@ namespace PolyhydraGames.Extensions
             return value.IsNumeric(out number) ? number.ToBool() : bool.Parse(value);
         }
 
-        public static bool ToBool(this int value)
+        public static bool ToBool(this int value)   
         {
             return value > 0;
         }

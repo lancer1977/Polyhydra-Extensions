@@ -31,6 +31,6 @@
     <tags></tags>
   </metadata>
   <files>
-    <file src="..\Extensions\bin\Release\netstandard2.0\PolyhydraGames.Extensions.*" target="lib\netstandard2.0" /> 
+    <file src="..\Extensions\bin\release\netstandard2.0\PolyhydraGames.Extensions.*" target="lib\netstandard2.0" /> 
   </files>
 </package>
