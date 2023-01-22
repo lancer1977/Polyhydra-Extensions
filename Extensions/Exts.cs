@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace PolyhydraGames.Extensions
 {
- 
     public static class Exts
     {
         public static void ForEachItem(this IEnumerable<string> items, Action<string> act)
