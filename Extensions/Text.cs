@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,6 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace PolyhydraGames.Extensions
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static partial class Text
     {
     
@@ -92,14 +94,12 @@ namespace PolyhydraGames.Extensions
 
         public static string RemoveIllegalCharacters(this string aString)
         {
-            if (!string.IsNullOrEmpty(aString))
-            {
-                aString = aString.Replace(Environment.NewLine, "(VBNEWLINE)");
-                aString = aString.Replace("\"", "(QUOTES)");
-                aString = aString.Replace("@", "(ANDSYMBOL)");
-                aString = aString.Replace("#", "(POUNDSYMBOL)");
-                aString = aString.Replace(":", "(COLINSYMBOL)");
-            }
+            if (string.IsNullOrEmpty(aString)) return aString;
+            aString = aString.Replace(Environment.NewLine, "(VBNEWLINE)");
+            aString = aString.Replace("\"", "(QUOTES)");
+            aString = aString.Replace("@", "(ANDSYMBOL)");
+            aString = aString.Replace("#", "(POUNDSYMBOL)");
+            aString = aString.Replace(":", "(COLINSYMBOL)");
             return aString;
         }
 

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 
 namespace PolyhydraGames.Extensions
 {
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class AssemblyExtensions
     {
         public static Assembly GetAssembly(this Type type)
@@ -19,7 +21,7 @@ namespace PolyhydraGames.Extensions
          return assembly.GetManifestResourceStream(fullAddress);
             
         }
-        public static string GetEmbeddedResourceString(this Type type,string address)
+        public static string GetEmbeddedResourceString(this Type type, string address)
         {
             var text = "";
             using (var reader = new System.IO.StreamReader(GetEmbeddedResourceStream(type,address)))

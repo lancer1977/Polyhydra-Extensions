@@ -238,6 +238,23 @@ namespace PolyhydraGames.Extensions
             var index = DiceRoll.RollRandom(0, length - 1);
             return items[index];
         }
+        public static async Task<T> RandomItem<T>(this Task<IList<T>> call)
+        {
+            if (call == null) return default;
+            var items = await call;
+            var length = items.Count();
+            var index = DiceRoll.RollRandom(0, length - 1);
+            return items[index];
+        }
+
+        public static async Task<T> RandomItem<T>(this Task<IEnumerable<T>> call)
+        {
+            if (call == null) return default;
+            var items = (await call).ToList();
+            var length = items.Count;
+            var index = DiceRoll.RollRandom(0, length - 1);
+            return items[index];
+        }
 
         public static async Task<T> RandomItem<T>(this Func<Task<IList<T>>> call)
         {
