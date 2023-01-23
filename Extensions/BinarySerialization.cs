@@ -47,10 +47,10 @@ namespace PolyhydraGames.Extensions
             try
             {
                 // convert byte array to memory stream
-                System.IO.MemoryStream _MemoryStream = new System.IO.MemoryStream(_ByteArray);
+                var _MemoryStream = new System.IO.MemoryStream(_ByteArray);
 
                 // create new BinaryFormatter
-                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter _BinaryFormatter
+                var _BinaryFormatter
                     = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                 // set memory stream position to starting point

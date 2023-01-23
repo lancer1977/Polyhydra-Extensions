@@ -34,7 +34,7 @@ namespace PolyhydraGames.Extensions
         {
             if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(test))
                 return "";
-            int num = value.IndexOf(test, StringComparison.Ordinal);
+            var num = value.IndexOf(test, StringComparison.Ordinal);
             if (num < 0)
                 return "";
             return value.Substring(num + test.Length);
@@ -44,7 +44,7 @@ namespace PolyhydraGames.Extensions
         {
             if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(test))
                 return "";
-            int length = value.IndexOf(test, StringComparison.Ordinal);
+            var length = value.IndexOf(test, StringComparison.Ordinal);
             if (length <= 0)
                 return "";
             return value.Substring(0, length);

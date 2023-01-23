@@ -53,7 +53,7 @@ namespace PolyhydraGames.Extensions
         public static string[] GetResources(this Assembly assembly)
         {
 
-            string[] resources = assembly.GetManifestResourceNames();
+            var resources = assembly.GetManifestResourceNames();
             return resources;
         }
 

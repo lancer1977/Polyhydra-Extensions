@@ -9,7 +9,7 @@ namespace PolyhydraGames.Extensions
         public static string GetEmbeddedText(Type sharedType, string name)
         {
             var assembly = sharedType.GetTypeInfo().Assembly;
-            string result = "";
+            var result = "";
 
             using (var stream = assembly.GetManifestResourceStream(name))
             using (var reader = new StreamReader(stream))

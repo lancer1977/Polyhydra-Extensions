@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using PolyhydraGames.Extensions.Dice;
 
 namespace PolyhydraGames.Extensions
@@ -12,12 +13,12 @@ namespace PolyhydraGames.Extensions
 
         public static void Shuffle<T>(this IList<T> list)
         {
-            int n = list.Count;
+            var n = list.Count;
             while (n > 1)
             {
                 n--;
-                int k = rng.Next(n + 1);
-                T value = list[k];
+                var k = rng.Next(n + 1);
+                var value = list[k];
                 list[k] = list[n];
                 list[n] = value;
             }
@@ -236,6 +237,25 @@ namespace PolyhydraGames.Extensions
             var length = items.Count();
             var index = DiceRoll.RollRandom(0, length - 1);
             return items[index];
+        }
+
+        public static async Task<T> RandomItem<T>(this Func<Task<IList<T>>> call)
+        {
+            if (call == null) return default;
+            var items = await call();
+            var length = items.Count();
+            var index = DiceRoll.RollRandom(0, length - 1);
+            return items[index];
+        }
+
+        public static async Task<T> RandomItem<T>(this Func<Task<IEnumerable<T>>> call)
+        {
+            if (call == null) return default;
+            var items = await call();
+            var list = items.ToList();
+            var length = list.Count;
+            var index = DiceRoll.RollRandom(0, length - 1);
+            return list[index];
         }
 
         public static List<T> GetRandomizedList<T>(this IEnumerable<T> sourceItems)

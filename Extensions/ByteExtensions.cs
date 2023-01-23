@@ -47,7 +47,7 @@ namespace PolyhydraGames.Extensions
                 var memoryStream = new System.IO.MemoryStream(byteArray);
 
                 // create new BinaryFormatter
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                var binaryFormatter = new BinaryFormatter();
 
                 // set memory stream position to starting point
                 memoryStream.Position = 0;

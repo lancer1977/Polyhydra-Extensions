@@ -28,9 +28,9 @@ namespace PolyhydraGames.Extensions
 
         public static string FirstInt(this string value)
         {
-            string output = "";
-            bool foundInt = false;
-            for (int x = 0; x < value.Length; x++)
+            var output = "";
+            var foundInt = false;
+            for (var x = 0; x < value.Length; x++)
             {
                 int outint;
                 if (value[x].IsNumeric(out outint))
@@ -49,8 +49,8 @@ namespace PolyhydraGames.Extensions
 
         public static string FirstWord(this string value)
         {
-            string output = "";
-            for (int x = 0; x < value.Length; x++)
+            var output = "";
+            for (var x = 0; x < value.Length; x++)
             {
                 if (value[x].IsNumeric())
                     break;
@@ -66,15 +66,15 @@ namespace PolyhydraGames.Extensions
 
         public static string TextAfterString(this string value, string test)
         {
-            if (String.IsNullOrEmpty(value) || String.IsNullOrEmpty(test)) return "";
-            int index = value.LastIndexOf(test, StringComparison.Ordinal);
+            if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(test)) return "";
+            var index = value.LastIndexOf(test, StringComparison.Ordinal);
             return index > 0 ? value.Substring(index + test.Length) : "";
         }
 
         public static string TextBeforeString(this string value, string test)
         {
-            if (String.IsNullOrEmpty(value) || String.IsNullOrEmpty(test)) return "";
-            int index = value.LastIndexOf(test, StringComparison.Ordinal);
+            if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(test)) return "";
+            var index = value.LastIndexOf(test, StringComparison.Ordinal);
             return index > 0 ? value.Substring(0, index) : "";
         }
 
@@ -92,7 +92,7 @@ namespace PolyhydraGames.Extensions
 
         public static string RemoveIllegalCharacters(this string aString)
         {
-            if (!String.IsNullOrEmpty(aString))
+            if (!string.IsNullOrEmpty(aString))
             {
                 aString = aString.Replace(Environment.NewLine, "(VBNEWLINE)");
                 aString = aString.Replace("\"", "(QUOTES)");
@@ -105,10 +105,10 @@ namespace PolyhydraGames.Extensions
 
         public static string Between(this string aString, string character1, string character2, bool between)
         {
-            int index1 = string.IsNullOrEmpty(character1) ? 0 : aString.IndexOf(character1, StringComparison.Ordinal);
+            var index1 = string.IsNullOrEmpty(character1) ? 0 : aString.IndexOf(character1, StringComparison.Ordinal);
             if (character2 == null)
                 return aString.Substring(index1);
-            int length = character1 != character2
+            var length = character1 != character2
                 ? (aString.IndexOf(character2, StringComparison.Ordinal) + 1 - index1)
                 : aString.LastIndexOf(character2, StringComparison.Ordinal) + 1 - index1;
             if (index1 >= 0 && length > 0)
@@ -118,12 +118,12 @@ namespace PolyhydraGames.Extensions
 
         public static string Between(this string aString, string character1, string character2)
         {
-            int index1 = string.IsNullOrEmpty(character1)
+            var index1 = string.IsNullOrEmpty(character1)
                 ? 0
                 : aString.IndexOf(character1, StringComparison.Ordinal) + 1;
             if (character2 == null)
                 return aString.Substring(index1);
-            int length = character1 != character2
+            var length = character1 != character2
                 ? (aString.IndexOf(character2, StringComparison.Ordinal) - index1)
                 : aString.LastIndexOf(character2, StringComparison.Ordinal) - index1;
             if (index1 >= 0 && length > 0)
@@ -149,7 +149,7 @@ namespace PolyhydraGames.Extensions
         public static string ToCodedArray<T>(this IEnumerable<T> aryArray, string store = "#")
         {
             if (aryArray == null) return "";
-            T[] items = aryArray.ToArray();
+            var items = aryArray.ToArray();
             return (items.Any())
                 ? (from object itemLoopVariable in items select itemLoopVariable.ToString()).Aggregate(
                     (current, item) => current + store + item.ToString())
@@ -159,26 +159,24 @@ namespace PolyhydraGames.Extensions
         public static string ToCodedArrayBuilder<T>(this IEnumerable<T> aryArray, string store = "#")
         {
             if (aryArray == null) return "";
-            T[] enumerable = aryArray as T[] ?? aryArray.ToArray();
-            StringBuilder builder = enumerable.Aggregate(
+            var enumerable = aryArray as T[] ?? aryArray.ToArray();
+            var builder = enumerable.Aggregate(
                 new StringBuilder(),
                 (sb, s) => sb.AppendLine(s.ToString() + store)
                 );
-            string final = builder.ToString();
-            int length = final.Length - store.Length;
+            var final = builder.ToString();
+            var length = final.Length - store.Length;
             return final.Substring(0, length);
         }
 
-        public static string ToDictionaryCodedString<T, TE>(this Dictionary<T, TE> aryArray, string mergevalue = ":",
-            string store = "#")
+        public static string ToDictionaryCodedString<T, TE>(this Dictionary<T, TE> aryArray, string mergevalue = ":", string store = "#")
         {
             return aryArray == null
                 ? ""
                 : aryArray.Select(item => item.Key + mergevalue + item.Value).ToCodedArray(store);
         }
 
-        public static string[] ToDictionaryCodedArray<T, TE>(this Dictionary<T, TE> aryArray, string mergevalue = ":",
-            string store = "#")
+        public static string[] ToDictionaryCodedArray<T, TE>(this Dictionary<T, TE> aryArray, string mergevalue = ":", string store = "#")
         {
             return aryArray == null
                 ? new string[0]
@@ -188,7 +186,7 @@ namespace PolyhydraGames.Extensions
         public static string ToCodedArrayWithSpace<T>(this IEnumerable<T> aryArray, string store = "#")
         {
             if (aryArray == null) return "";
-            T[] items = aryArray.ToArray();
+            var items = aryArray.ToArray();
             return (items.Length > 0)
                 ? (from object itemLoopVariable in items select itemLoopVariable.ToString()).Aggregate(
                     (current, item) => current + store + item.ToString().InsSpace())
@@ -202,12 +200,12 @@ namespace PolyhydraGames.Extensions
 
         public static string InsSpaceBeforeInt(this string aString)
         {
-            if (String.IsNullOrEmpty(aString)) return "";
+            if (string.IsNullOrEmpty(aString)) return "";
             if (!(aString.Length > 2)) return aString;
-            string newString = "";
-            for (int x = 0; x < aString.Length - 1; x++)
+            var newString = "";
+            for (var x = 0; x <= aString.Length; x++)
             {
-                newString += (Char.IsLower(aString[x]) && Char.IsNumber(aString[x + 1]))
+                newString += (char.IsLower(aString[x]) && char.IsNumber(aString[x + 1]))
                     ? aString[x] + " "
                     : aString[x].ToString();
             }
@@ -233,7 +231,7 @@ namespace PolyhydraGames.Extensions
                 return value;
             var result = new StringBuilder(value);
             result[0] = char.ToUpper(result[0]);
-            for (int i = 1; i < result.Length; ++i)
+            for (var i = 1; i < result.Length; ++i)
             {
                 if (char.IsWhiteSpace(result[i - 1]))
                     result[i] = char.ToUpper(result[i]);
@@ -245,14 +243,14 @@ namespace PolyhydraGames.Extensions
 
         public static string Capitalize(this string value)
         {
-            if (String.IsNullOrEmpty(value)) return value;
-            char letter1 = char.ToUpperInvariant(value[0]);
+            if (string.IsNullOrEmpty(value)) return value;
+            var letter1 = char.ToUpperInvariant(value[0]);
             return value.Length >= 2 ? letter1 + value.Substring(1) : letter1.ToString();
         }
 
         public static string ToCapitalizedWords(this string value)
         {
-            string[] items = value.Split(' ');
+            var items = value.Split(' ');
             if (items.Length == 1) return items[0].Capitalize();
             string[] returnList = items.Select(item => item.Capitalize()).ToArray();
             return returnList.ToCodedArray(" ");
@@ -282,8 +280,7 @@ namespace PolyhydraGames.Extensions
             return code.Replace(split.ToString(), replaceWith);
         }
 
-        public static string ReplaceAllBetween(this string aString, string character1, string character2,
-            Boolean characters)
+        public static string ReplaceAllBetween(this string aString, string character1, string character2, bool characters)
         {
             if (aString.Contains(character1) && aString.Contains(character2))
             {
@@ -315,7 +312,7 @@ namespace PolyhydraGames.Extensions
 
         public static string[] SplitText(this string code)
         {
-            string newline = Environment.NewLine;
+            var newline = Environment.NewLine;
             if (newline == "\r\n")
             {
                 code = code.Replace(Environment.NewLine, "\r");

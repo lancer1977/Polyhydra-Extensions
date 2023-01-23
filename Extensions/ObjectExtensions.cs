@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace PolyhydraGames.Extensions
 {
+
     public static class ObjectExtensions
     {
         public static T Clone<T>(this object source)
@@ -33,7 +34,7 @@ namespace PolyhydraGames.Extensions
 
                 if (prop != null && prop.PropertyType == propertyInfo.PropertyType)
                 {
-                    object value = propertyInfo.GetValue(source, null);
+                    var value = propertyInfo.GetValue(source, null);
                     if (null != value) prop.SetValue(target, value, null);
                 }
 

@@ -16,7 +16,7 @@ namespace PolyhydraGames.Extensions
 
         public static IEnumerable<Type> GetTypesWithHelpAttribute<T>(this Assembly assembly)
         {
-            foreach (TypeInfo type in assembly.DefinedTypes)
+            foreach (var type in assembly.DefinedTypes)
             {
                 if (type.GetCustomAttributes(typeof(T), true).Any())
                 {

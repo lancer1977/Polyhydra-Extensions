@@ -27,7 +27,7 @@ namespace PolyhydraGames.Extensions
 
         public static T ToEnum<T>(this string value) where T : struct
         { 
-            T outVal = default(T);
+            var outVal = default(T);
             if (!string.IsNullOrEmpty(value) && !Enum.TryParse<T>(value, out outVal))
             {
                 var converted = value.ToEnumNormalized();

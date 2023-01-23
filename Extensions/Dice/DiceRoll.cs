@@ -58,11 +58,11 @@ namespace PolyhydraGames.Extensions.Dice
             if (dice.Contains("d") == false) dicePool.Add(dice.ToInt());
             else
             {
-                string[] split = dice.Split('d');
+                var split = dice.Split('d');
                 if (split.Length < 2) return null;
-                int number = split[0].ToInt();
-                int type = split[1].ToInt();
-                for (int x = 0; x < number; x++)
+                var number = split[0].ToInt();
+                var type = split[1].ToInt();
+                for (var x = 0; x < number; x++)
                     dicePool.Add(D(type).Invoke());
             }
             return dicePool;
@@ -162,8 +162,8 @@ namespace PolyhydraGames.Extensions.Dice
         /// <returns></returns>
         public static int RollDice(int bonus, int number, int sides)
         {
-            int total = bonus;
-            for (int x = 0; x < number; x++)
+            var total = bonus;
+            for (var x = 0; x < number; x++)
                 total += RollRandom(1, sides);
             return total;
         }
@@ -176,7 +176,7 @@ namespace PolyhydraGames.Extensions.Dice
         public static int RollDice(string dice)
         {
             if (string.IsNullOrEmpty(dice)) return 0;
-            string[] dicePool = dice.Split('+');
+            var dicePool = dice.Split('+');
             Debug.WriteLine(dicePool.ToCodedArray());
             return dicePool.Sum(item => RollNDie(item));
         }
@@ -186,7 +186,7 @@ namespace PolyhydraGames.Extensions.Dice
             if (string.IsNullOrEmpty(dice)) return 0;
             if (dice.Contains("+"))
             {
-                string[] dicePool = dice.Split('+');
+                var dicePool = dice.Split('+');
                 Debug.WriteLine(dicePool.ToCodedArray());
                 return dicePool.Sum(item => DieMax(item));
             }
@@ -198,7 +198,7 @@ namespace PolyhydraGames.Extensions.Dice
             if (string.IsNullOrEmpty(dice)) return 0;
             if (dice.Contains("+"))
             {
-                string[] dicePool = dice.Split('+');
+                var dicePool = dice.Split('+');
                 Debug.WriteLine(dicePool.ToCodedArray());
                 return dicePool.Sum(item => DieMin(item));
             }
@@ -215,9 +215,9 @@ namespace PolyhydraGames.Extensions.Dice
             dice = dice.ToLower();
             if (dice.Contains("d"))
             {
-                string[] split = dice.Split('d');
-                int number = split[0].ToInt();
-                int sides = split[1].ToInt();
+                var split = dice.Split('d');
+                var number = split[0].ToInt();
+                var sides = split[1].ToInt();
                 return number * sides;
             }
             return dice.ToInt();
@@ -254,7 +254,7 @@ namespace PolyhydraGames.Extensions.Dice
         /// <returns></returns>
         public static int RollDie(int dieSides)
         {
-            int result = RollRandom(1, dieSides);
+            var result = RollRandom(1, dieSides);
             Debug.WriteLine("Die:{0} Result:{1}", "1d" + dieSides, result);
             return result;
         }

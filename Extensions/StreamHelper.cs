@@ -6,8 +6,8 @@ namespace PolyhydraGames.Pathfinder.Helpers
     {
         public static Stream ToStream(this string str)
         {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
             writer.Write(str);
             writer.Flush();
             stream.Position = 0;

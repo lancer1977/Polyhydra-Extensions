@@ -112,10 +112,10 @@ namespace PolyhydraGames.Extensions
 
         public static string Dec2Frac(float f)
         {
-            float df = 1f;
-            string result = string.Empty;
-            int lUpperPart = 1;
-            int lLowerPart = 1;
+            var df = 1f;
+            var result = string.Empty;
+            var lUpperPart = 1;
+            var lLowerPart = 1;
 
             while (Math.Abs(df - f) > .001)
             {

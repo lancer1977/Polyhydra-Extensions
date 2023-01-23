@@ -120,10 +120,10 @@ namespace PolyhydraGames.Extensions
         }
         public static T FindByFields<T>(this object frame, string name)
         {
-            Type t = typeof(T);
-            FieldInfo fi = t.GetRuntimeFields().FirstOrDefault(f => f.Name == name);
+            var t = typeof(T);
+            var fi = t.GetRuntimeFields().FirstOrDefault(f => f.Name == name);
             if (fi == null) throw new NullReferenceException($"Field {name} not found.");
-            T value = (T)fi.GetValue(frame);
+            var value = (T)fi.GetValue(frame);
             return value;
         }
 
