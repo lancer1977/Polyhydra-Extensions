@@ -3,6 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace PolyhydraGames.Extensions
 {
+#if NETSTANDARD2_0
     public static class ByteExtensions
     {
         /// <summary>
@@ -65,4 +66,5 @@ namespace PolyhydraGames.Extensions
             return null;
         }
     }
+#endif
 }

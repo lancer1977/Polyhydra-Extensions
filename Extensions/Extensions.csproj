@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net7.0;</TargetFrameworks>
     <AssemblyName>PolyhydraGames.Extensions</AssemblyName>
     <RootNamespace>PolyhydraGames.Extensions</RootNamespace>
     <ReleaseVersion>2.1.0.8</ReleaseVersion>
@@ -14,5 +14,9 @@
 
   <ItemGroup>
     <None Include="..\nuget\PolyhydraGames.Extensions.nuspec" Link=".nuget\PolyhydraGames.Extensions.nuspec" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="SonarAnalyzer.CSharp" Version="8.52.0.60960" />
   </ItemGroup>
 </Project>
