@@ -7,6 +7,17 @@ namespace PolyhydraGames.Extensions.Dice
 {
     public static class DiceRoll
     {
+        public static int ClampedDieRoll(int sides, int min, int max)
+        {
+            if (sides > max || sides < min)
+                throw new InvalidOperationException($"INVALID Clamp!  sides {sides}, min {min}, max {max}");
+            while (true)
+            {
+                var dieRoll = DiceRoll.RollDie(max);
+                if (sides > max || sides < min) continue;
+                return dieRoll;
+            }
+        }
         private static readonly Random Rand = new Random();
         /// <summary>
         /// Returns the minimum die roll.
