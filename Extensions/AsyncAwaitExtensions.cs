@@ -18,13 +18,14 @@ namespace PolyhydraGames.Extensions
             var enumerable = await source;
             return enumerable.ToList();
         }
-        //
+
+#if NET7_0_OR_GREATER
         public static async Task<IEnumerable<T>> DistinctAsync<T>(this Task<IEnumerable<T>> source, Func<T, object> orderer)
         {
             var enumerable = await source;
             return enumerable.DistinctBy(orderer);
         }
-
+#endif
         public static async Task<IEnumerable<T>> OrderByAsync<T>(this Task<IEnumerable<T>> source, Func<T, object> orderer)
         {
             var enumerable = await source;
