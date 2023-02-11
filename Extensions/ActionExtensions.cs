@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PolyhydraGames.Extensions
 {
@@ -50,6 +51,14 @@ namespace PolyhydraGames.Extensions
                 act();
             }
 
+        }
+        
+        public static async Task ExecuteAsync(this Func<Task> act, int times = 1)
+        {
+            if (times <= 0)
+                return;
+            for (var index = 0; index < times; ++index)
+                await act();
         }
     }
 }
