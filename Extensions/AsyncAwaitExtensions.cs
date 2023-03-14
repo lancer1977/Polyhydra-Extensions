@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace PolyhydraGames.Extensions
-{ 
+{
     public static class AsyncTaskExtensions
     {
         public static async Task<List<T>> ToListAsync<T>(this Func<Task<IEnumerable<T>>> source)
@@ -53,5 +53,14 @@ namespace PolyhydraGames.Extensions
             for (var index = 0; index < times; ++index)
                 await act();
         }
+
+
+
+        public static async Task<IEnumerable<TResult>> SelectAsync<T, TResult>(this Task<List<T>> source, Func<T, TResult> selector) where T : new()
+        {
+            var enumerable = await source;
+            return enumerable.Select(selector);
+        }
+
     }
 }
