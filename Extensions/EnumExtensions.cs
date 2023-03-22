@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PolyhydraGames.Extensions
 {
- 
+
     public static class EnumExtensions
     {
 
@@ -19,38 +19,32 @@ namespace PolyhydraGames.Extensions
 
         public static T ToEnum<T>(this int value)
         {
-            return  (T)Enum.ToObject(typeof(T), value);
-                       //: (T)Enum.ToObject(typeof(T), 0);
+            return (T)Enum.ToObject(typeof(T), value);
+            //: (T)Enum.ToObject(typeof(T), 0);
         }
 
- 
+
 
         public static T ToEnum<T>(this string value) where T : struct
-        { 
+        {
             var outVal = default(T);
-            if (!string.IsNullOrEmpty(value) && !Enum.TryParse<T>(value, out outVal))
+            if (string.IsNullOrEmpty(value)) return outVal;
+
+            if (Enum.TryParse(value, true, out outVal))
             {
-                var converted = value.ToEnumNormalized();
-                try
-                {
-                    outVal = (T)Enum.Parse(typeof(T), converted,true);  
-                }
-                catch (Exception ex)
-                {
-                
-                }
-            
+                return outVal;
             }
 
+            Enum.TryParse(value.ToEnumNormalized(), true, out outVal);
             return outVal;
         }
 
- 
+
         public static bool EnumStringCompare<T>(T enumItem, string value)
         {
             var normalized2 = enumItem.ToString().ToEnumNormalized();
             var normalized1 = value.ToEnumNormalized();
-          return string.Equals(normalized2, normalized1, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(normalized2, normalized1, StringComparison.OrdinalIgnoreCase);
 
         }
 
@@ -113,8 +107,8 @@ namespace PolyhydraGames.Extensions
         public static T[] EnumerateEnumType<T>()
         {
             var enumType = typeof(T);
-            var enumValArray = Enum.GetValues(enumType); 
-            return (from object itemLoopVariable in enumValArray select (T) itemLoopVariable).ToArray();
+            var enumValArray = Enum.GetValues(enumType);
+            return (from object itemLoopVariable in enumValArray select (T)itemLoopVariable).ToArray();
         }
 
 
