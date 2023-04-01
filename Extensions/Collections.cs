@@ -10,17 +10,15 @@ namespace PolyhydraGames.Extensions
     public static class Collections
     {
         private static Random rng = new Random();
+        
 
         public static void Shuffle<T>(this IList<T> list)
         {
-            var n = list.Count;
-            while (n > 1)
+            Random rand = new Random();
+            for (int i = 0; i < list.Count; i++)
             {
-                n--;
-                var k = rng.Next(n + 1);
-                var value = list[k];
-                list[k] = list[n];
-                list[n] = value;
+                int swapIndex = rand.Next(list.Count);
+                (list[swapIndex], list[i]) = (list[i], list[swapIndex]);
             }
         }
 
@@ -318,7 +316,7 @@ namespace PolyhydraGames.Extensions
                 currentList.Remove(existing);
             currentList.Add(replacement);
         }
- 
+
         public static string ToCodedArray(this IEnumerable<string> items, string joinText = "#")
         {
             return string.Join(joinText, items);
