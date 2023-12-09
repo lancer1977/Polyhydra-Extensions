@@ -66,8 +66,8 @@ namespace PolyhydraGames.Extensions
             var enumerable = await source;
             return enumerable.Select(selector);
         }
-        
-      
+
+
         [Obsolete("Inefficient, avoid use")]
         public static async Task<IEnumerable<T>> WhereAsync<T>(this Task<IEnumerable<T>> itemTask, Func<T, bool> predicate)
         {
@@ -85,4 +85,3 @@ namespace PolyhydraGames.Extensions
         }
     }
 }
- 

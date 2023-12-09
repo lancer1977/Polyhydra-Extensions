@@ -103,17 +103,43 @@ namespace PolyhydraGames.Extensions
             return aString;
         }
 
-        public static string Between(this string aString, string character1, string character2, bool between)
+        //public static string Between(this string aString, string character1, string character2, bool between)
+        //{
+        //    var index1 = string.IsNullOrEmpty(character1) ? 0 : aString.IndexOf(character1, StringComparison.Ordinal);
+        //    if (character2 == null)
+        //        return aString.Substring(index1);
+        //    var length = character1 != character2
+        //        ? (aString.IndexOf(character2, StringComparison.Ordinal) + 1 - index1)
+        //        : aString.LastIndexOf(character2, StringComparison.Ordinal) + 1 - index1;
+        //    if (index1 >= 0 && length > 0)
+        //        return aString.Substring(index1, length);
+        //    return "";
+        //}
+
+        /// <summary>
+        /// Get the text between two strings.
+        /// </summary>
+        /// <param name="aString">source</param>
+        /// <param name="character1">front string</param>
+        /// <param name="character2">end string</param>
+        /// <param name="includeCharacters">return the found front and back strings</param>
+        /// <returns></returns>
+        public static string Between(this string aString, string character1, string character2, bool includeCharacters = false)
         {
-            var index1 = string.IsNullOrEmpty(character1) ? 0 : aString.IndexOf(character1, StringComparison.Ordinal);
-            if (character2 == null)
-                return aString.Substring(index1);
-            var length = character1 != character2
-                ? (aString.IndexOf(character2, StringComparison.Ordinal) + 1 - index1)
-                : aString.LastIndexOf(character2, StringComparison.Ordinal) + 1 - index1;
-            if (index1 >= 0 && length > 0)
-                return aString.Substring(index1, length);
-            return "";
+            if (string.IsNullOrEmpty(aString)) return "";
+            var char1isNothing = string.IsNullOrEmpty(character1);
+            var char2isNothing = string.IsNullOrEmpty(character2); 
+
+            var startIndex = char1isNothing ? 0 : aString.IndexOf(character1, StringComparison.Ordinal) + (includeCharacters ? 0 : character1.Length);
+
+            if (char2isNothing)
+                return aString.Substring(startIndex);
+
+            var length = (character1.Contains(character2) ? aString.LastIndexOf(character2, StringComparison.Ordinal) - startIndex : aString.IndexOf(character2, StringComparison.Ordinal) - startIndex) ;
+            if (includeCharacters)
+                length += character2.Length;
+
+            return startIndex >= 0 && length > 0 ? aString.Substring(startIndex, length) : "";
         }
 
         public static string Between(this string aString, string character1, string character2)

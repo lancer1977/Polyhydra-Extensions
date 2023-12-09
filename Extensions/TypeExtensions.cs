@@ -85,8 +85,19 @@ namespace PolyhydraGames.Extensions
                 return types.Where(x => !except.Contains(x));
             }
         }
-
  
+ 
+        /// Tests if TImplementation implements TInterface
+        public static bool Implements<TImplementation, TInterface>()
+        {
+            return typeof(TInterface).IsAssignableFrom(typeof(TImplementation));
+        }
+
+        /// Tests if TImplementation implements TInterface
+        public static bool Implements<TInterface>(this Type implementation)
+        {
+            return typeof(TInterface).IsAssignableFrom(implementation);
+        } 
          
     }
 }
