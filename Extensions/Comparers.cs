@@ -23,7 +23,7 @@ namespace PolyhydraGames.Extensions
                 bestDistance = distance;
                 best = s;
             }
-            return bestDistance <= threshold ? best : null;
+            return bestDistance <= threshold ? best : string.Empty;
         }
 
         public static bool IsSimilar(this string s1, string s2, int threshold = 3)

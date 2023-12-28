@@ -14,12 +14,12 @@ namespace Extensions.Test1
     {
         [TestCase("Bulls Strength", ExpectedResult = "Bull's Strength")]
         [TestCase("BullsStrength", ExpectedResult = "Bull's Strength")]
-        [TestCase("BullsStrent", ExpectedResult = null)]
+        [TestCase("BullsStrent", ExpectedResult = "")]
         [TestCase("Shield Other", ExpectedResult = "Shield Other")]
         [TestCase("Shield Of Faith", ExpectedResult = "Shield of Faith")]
         [TestCase("Bull's Strength", ExpectedResult = "Bull's Strength")]
         [TestCase("BullsStrength", ExpectedResult = "Bull's Strength")]
-        [TestCase("BuLlSStrEngth", ExpectedResult = null)]
+        [TestCase("BuLlSStrEngth", ExpectedResult = "")]
         public string FindMostSimilarTest(string word)
         {
             var list = new List<string>
