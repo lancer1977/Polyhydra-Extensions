@@ -9,7 +9,49 @@ using PolyhydraGames.Pathfinder.Enumerations;
 
 namespace Extensions.Test1
 {
-     
+    [TestFixture]
+    public class ComparerTests
+    {
+        [TestCase("Bulls Strength", ExpectedResult = "Bull's Strength")]
+        [TestCase("BullsStrength", ExpectedResult = "Bull's Strength")]
+        [TestCase("BullsStrent", ExpectedResult = null)]
+        [TestCase("Shield Other", ExpectedResult = "Shield Other")]
+        [TestCase("Shield Of Faith", ExpectedResult = "Shield of Faith")]
+        [TestCase("Bull's Strength", ExpectedResult = "Bull's Strength")]
+        [TestCase("BullsStrength", ExpectedResult = "Bull's Strength")]
+        [TestCase("BuLlSStrEngth", ExpectedResult = null)]
+        public string FindMostSimilarTest(string word)
+        {
+            var list = new List<string>
+            {
+                "Bull's Strength",
+                "Shield Other",
+                "Shield of Faith"
+            };
+            var result = list.FindMostSimilar(word);
+            return result;
+        }
+
+        [TestCase("Bulls Strength", ExpectedResult = true)]
+        [TestCase("BullsStrength", ExpectedResult = true)]
+        [TestCase("BullsStrent", ExpectedResult = false)]
+        [TestCase("Shield Other", ExpectedResult = true)]
+        [TestCase("Shield Of Faith", ExpectedResult = true)]
+        [TestCase("Bull's Strength", ExpectedResult = true)]
+        [TestCase("BullsStrength", ExpectedResult = true)]
+        [TestCase("BuLlSStrEngth", ExpectedResult = false)]
+        public bool IsSimilarTest(string word)
+        {
+            var list = new List<string>
+            {
+                "Bull's Strength",
+                "Shield Other",
+                "Shield of Faith"
+            };
+            var result = list.FindMostSimilar(word);
+            return result != null;
+        }
+    }
 
     [TestFixture]
     public class EnumTests

@@ -10,8 +10,7 @@ namespace PolyhydraGames.Extensions
         {
             foreach (var item in items)
             {
-                var i = item;
-                act(i);
+                act(item);
             }
         }
 
