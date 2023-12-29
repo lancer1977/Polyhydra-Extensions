@@ -49,7 +49,7 @@ namespace Extensions.Test1
                 "Shield of Faith"
             };
             var result = list.FindMostSimilar(word);
-            return result != null;
+            return result != string.Empty;
         }
     }
 

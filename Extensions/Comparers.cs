@@ -18,7 +18,7 @@ namespace PolyhydraGames.Extensions
             var bestDistance = int.MaxValue;
             foreach (var s in items)
             {
-                var distance = CalculateLevenshteinDistance(value, s);
+                var distance = LevenshteinDistance(value, s);
                 if (distance >= bestDistance) continue;
                 bestDistance = distance;
                 best = s;
@@ -26,11 +26,11 @@ namespace PolyhydraGames.Extensions
             return bestDistance <= threshold ? best : string.Empty;
         }
 
-        public static bool IsSimilar(this string s1, string s2, int threshold = 3)
+        public static bool GetLevenshteinDistance(this string s1, string s2, int threshold = 3)
         {
-            return CalculateLevenshteinDistance(s1, s2) <= threshold;
+            return s1.LevenshteinDistance(s2) <= threshold;
         }
-        public static int CalculateLevenshteinDistance(string s1, string s2)
+        public static int LevenshteinDistance(this string s1, string s2)
         {
             var distance = new int[s1.Length + 1, s2.Length + 1];
 
