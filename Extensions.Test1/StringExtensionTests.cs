@@ -21,3 +21,82 @@ public class StringExtensionTests
         return result;
     }
 }
+
+
+[TestFixture]
+public class ComparersTests
+{
+    [Test]
+    public void FindMostSimilar_ShouldReturnMostSimilarString()
+    {
+        // Arrange
+        var list = new List<string> { "apple", "banana", "cherry" };
+        var value = "appel";
+        // Act
+        var result = list.FindMostSimilar(value);
+        // Assert
+        Assert.AreEqual("apple", result);
+    }
+    [Test]
+    public void GetLevenshteinDistance_ShouldReturnTrueIfDistanceIsLessThanOrEqualToThreshold()
+    {
+        // Arrange
+        var s1 = "apple";
+        var s2 = "appel";
+        // Act
+        var result = s1.GetLevenshteinDistance(s2);
+        // Assert
+        Assert.IsTrue(result);
+    }
+    [Test]
+    public void LevenshteinDistance_ShouldReturnCorrectDistance()
+    {
+        // Arrange
+        var s1 = "apple";
+        var s2 = "appel";
+        // Act
+        var result = s1.LevenshteinDistance(s2);
+        // Assert
+        Assert.AreEqual(2, result);
+    }
+}
+
+
+[TestFixture]
+public class HtmlStyleHelpersTests
+{
+    [Test]
+    public void Show_ShouldReturnEmptyStringIfTrue()
+    {
+        // Arrange
+        var value = true;
+        // Act
+        var result = HtmlStyleHelpers.Show(value);
+        // Assert
+        Assert.AreEqual("", result);
+    }
+    [Test]
+    public void Show_ShouldReturnDisplayNoneIfFalse()
+    {
+        // Arrange
+        var value = false;
+        // Act
+        var result = HtmlStyleHelpers.Show(value);
+        // Assert
+        Assert.AreEqual("display:none;", result);
+    }
+}
+[TestFixture]
+public class HttpEncodingTests
+{
+    [Test]
+    public void ToUrlEncoded_ShouldReturnUrlEncodedString()
+    {
+        // Arrange
+        var value = "Hello World!";
+        // Act
+        var result = value.ToUrlEncoded();
+        // Assert
+        Assert.AreEqual("Hello%20World%21", result);
+    }
+}
