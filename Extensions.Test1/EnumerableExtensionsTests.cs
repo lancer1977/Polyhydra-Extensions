@@ -15,7 +15,7 @@ public class EnumerableExtensionsTests
         // Act
         var result = list.GetFirstAndLastT(func);
         // Assert
-        Assert.AreEqual((1, 5), result);
+        Assert.That((1, 5) == result);
     }
     [Test]
     public void GetFirstAndLastT_ShouldReturnDefaultValuesForEmptyList()
@@ -26,7 +26,7 @@ public class EnumerableExtensionsTests
         // Act
         var result = list.GetFirstAndLastT(func);
         // Assert
-        Assert.AreEqual((0, 0), result);
+        Assert.That((0, 0) ==  result);
     }
 }
 

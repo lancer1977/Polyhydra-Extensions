@@ -23,9 +23,8 @@ namespace Extensions.Test1
             // Act
             var result = validGuidString.ToGuid();
 
-            // Assert
-            Assert.IsInstanceOf<Guid>(result);
-            Assert.AreNotEqual(Guid.Empty, result);
+            // Assert 
+            Assert.That(Guid.Empty!= result);
         }
 
         [Test]
@@ -37,9 +36,8 @@ namespace Extensions.Test1
             // Act
             var result = invalidGuidString.ToGuid();
 
-            // Assert
-            Assert.IsInstanceOf<Guid>(result);
-            Assert.AreEqual(Guid.Empty, result);
+            // Assert 
+            Assert.That(Guid.Empty == result);
         }
 
         [Test]
@@ -51,9 +49,8 @@ namespace Extensions.Test1
             // Act
             var result = emptyString.ToGuid();
 
-            // Assert
-            Assert.IsInstanceOf<Guid>(result);
-            Assert.AreEqual(Guid.Empty, result);
+            // Assert 
+            Assert.That(Guid.Empty == result);
         }
     }
 }
