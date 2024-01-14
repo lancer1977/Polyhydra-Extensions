@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using PolyhydraGames.Extensions.Dice;
 
 namespace PolyhydraGames.Extensions
-{
+{ 
+
     public static class Collections
     {
         private static Random rng = new Random();
