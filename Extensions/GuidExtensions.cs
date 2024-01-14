@@ -5,6 +5,11 @@ namespace PolyhydraGames.Extensions
 {
     public static class GuidExtensions
     {
+        public static bool IsNew(this Guid guid)
+        {
+            return guid == Guid.Empty;
+        }
+        
         public static bool IsGuid(this string value)
         {
             return Guid.TryParse(value, out var _);
