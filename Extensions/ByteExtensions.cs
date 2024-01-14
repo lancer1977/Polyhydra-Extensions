@@ -1,8 +1,10 @@
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.RegularExpressions;
 
 namespace PolyhydraGames.Extensions
 {
+//LEAVE ALONE!
 #if NETSTANDARD2_0
     public static class ByteExtensions
     {
