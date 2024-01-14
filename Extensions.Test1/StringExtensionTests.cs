@@ -35,7 +35,7 @@ public class ComparersTests
         // Act
         var result = list.FindMostSimilar(value);
         // Assert
-        Assert.AreEqual("apple", result);
+        Assert.That("apple" == result);
     }
     [Test]
     public void GetLevenshteinDistance_ShouldReturnTrueIfDistanceIsLessThanOrEqualToThreshold()
@@ -46,7 +46,7 @@ public class ComparersTests
         // Act
         var result = s1.GetLevenshteinDistance(s2);
         // Assert
-        Assert.IsTrue(result);
+        Assert.That(result);
     }
     [Test]
     public void LevenshteinDistance_ShouldReturnCorrectDistance()
@@ -57,7 +57,7 @@ public class ComparersTests
         // Act
         var result = s1.LevenshteinDistance(s2);
         // Assert
-        Assert.AreEqual(2, result);
+        Assert.That(2 == result);
     }
 }
 
@@ -73,7 +73,7 @@ public class HtmlStyleHelpersTests
         // Act
         var result = HtmlStyleHelpers.Show(value);
         // Assert
-        Assert.AreEqual("", result);
+        Assert.That("" == result);
     }
     [Test]
     public void Show_ShouldReturnDisplayNoneIfFalse()
@@ -83,7 +83,7 @@ public class HtmlStyleHelpersTests
         // Act
         var result = HtmlStyleHelpers.Show(value);
         // Assert
-        Assert.AreEqual("display:none;", result);
+        Assert.That("display:none;" == result);
     }
 }
 [TestFixture]
@@ -97,6 +97,6 @@ public class HttpEncodingTests
         // Act
         var result = value.ToUrlEncoded();
         // Assert
-        Assert.AreEqual("Hello%20World%21", result);
+        Assert.That("Hello%20World%21"== result);
     }
 }

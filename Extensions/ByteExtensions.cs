@@ -1,6 +1,5 @@
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text.RegularExpressions;
 
 namespace PolyhydraGames.Extensions
 {

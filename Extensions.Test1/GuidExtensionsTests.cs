@@ -1,7 +1,5 @@
 using NUnit.Framework;
 using PolyhydraGames.Extensions;
-using System;
-using System.Diagnostics;
 
 namespace Extensions.Test1
 {
