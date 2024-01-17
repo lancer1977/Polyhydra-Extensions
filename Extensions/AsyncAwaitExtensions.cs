@@ -10,13 +10,13 @@ namespace PolyhydraGames.Extensions
 
     public static class AsyncExtensions
     {
-        #if NET6_0_OR_GREATER
+#if NET6_0_OR_GREATER
         public static async Task<IEnumerable<T>> DistinctAsync<T>(this Task<IEnumerable<T>> source, Func<T, object> orderer)
         {
             var enumerable = await source;
             return enumerable.DistinctBy(orderer);
         }
-        #endif
+#endif
         public static ILogger Log { get; set; }
 
         /// <summary>
@@ -47,12 +47,12 @@ namespace PolyhydraGames.Extensions
         /// Gets the required resource async  and pass it to the function of T.
         /// If an error occurs this is logged to the logger
         /// </summary>
-        /// <typeparam name="T">Return value</typeparam>
+        /// <typeparam name="TResult">Return value</typeparam>
         /// <typeparam name="T2">Get Resource</typeparam>
         /// <param name="clientTask">Function to grab the dependency</param>
         /// <param name="func">behavior to run</param>
         /// <returns></returns>
-        public static async Task<T> RunWithLog<T, T2>(this Task<T2> clientTask, Func<T2, Task<T>> func)
+        public static async Task<TResult> RunWithLog<TResult, T>(this Task<T> clientTask, Func<T, Task<TResult>> func)
         {
             try
             {
@@ -70,11 +70,11 @@ namespace PolyhydraGames.Extensions
         /// <summary>
         /// If the task completes, return this value
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
         /// <param name="task"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static async Task<T> Return<T>(this Task task, T defaultValue)
+        public static async Task<TResult> Return<TResult>(this Task task, TResult defaultValue)
         {
             await task;
             return defaultValue;
@@ -106,7 +106,7 @@ namespace PolyhydraGames.Extensions
 
 
 
-        public static async Task<T> FirstOrDefaultAsync<T>(this Task<IEnumerable<T>> itemTask, Func<T, bool> predicate)
+        public static async Task<TResult> FirstOrDefaultAsync<TResult>(this Task<IEnumerable<TResult>> itemTask, Func<TResult, bool> predicate)
         {
 
             var item = await itemTask;
@@ -115,47 +115,47 @@ namespace PolyhydraGames.Extensions
         }
 
 
-        public static async Task<List<T>> ToListAsync<T>(this Func<Task<IEnumerable<T>>> source)
+        public static async Task<List<TResult>> ToListAsync<TResult>(this Func<Task<IEnumerable<TResult>>> source)
         {
             var enumerable = await source.Invoke();
             return enumerable.ToList();
         }
 
-        public static async Task<List<T>> ToListAsync<T>(this Task<IEnumerable<T>> source)
+        public static async Task<List<TResult>> ToListAsync<TResult>(this Task<IEnumerable<TResult>> source)
         {
             var enumerable = await source;
             return enumerable.ToList();
         }
 
-        [Obsolete("Inefficient, avoid use")]
-        public static async Task<IEnumerable<TResult>> SelectAsync<T, TResult>(this Task<List<T>> source, Func<T, TResult> selector) where T : new()
-        {
-            var enumerable = await source;
-            return enumerable.Select(selector);
-        }
+        //[Obsolete("Inefficient, avoid use")]
+        //public static async Task<IEnumerable<TResult>> SelectAsync<T, TResult>(this Task<List<T>> source, Func<T, TResult> selector) where T : new()
+        //{
+        //    var enumerable = await source;
+        //    return enumerable.Select(selector);
+        //}
 
-        [Obsolete("Inefficient, avoid use")]
-        public static async Task<IEnumerable<TResult>> SelectAsync<T, TResult>(this Task<IEnumerable<T>> source, Func<T, TResult> selector)
-        {
-            var enumerable = await source;
-            return enumerable.Select(selector);
-        }
+        //[Obsolete("Inefficient, avoid use")]
+        //public static async Task<IEnumerable<TResult>> SelectAsync<T, TResult>(this Task<IEnumerable<T>> source, Func<T, TResult> selector)
+        //{
+        //    var enumerable = await source;
+        //    return enumerable.Select(selector);
+        //}
 
 
-        [Obsolete("Inefficient, avoid use")]
-        public static async Task<IEnumerable<T>> WhereAsync<T>(this Task<IEnumerable<T>> itemTask, Func<T, bool> predicate)
-        {
+        //[Obsolete("Inefficient, avoid use")]
+        //public static async Task<IEnumerable<T>> WhereAsync<T>(this Task<IEnumerable<T>> itemTask, Func<T, bool> predicate)
+        //{
 
-            var item = await itemTask;
-            return item.Where(predicate);
+        //    var item = await itemTask;
+        //    return item.Where(predicate);
 
-        }
+        //}
 
-        [Obsolete("Inefficient, avoid use")]
-        public static async Task<IEnumerable<T>> OrderByAsync<T>(this Task<IEnumerable<T>> source, Func<T, object> orderer)
-        {
-            var enumerable = await source;
-            return enumerable.OrderBy(orderer);
-        }
+        //[Obsolete("Inefficient, avoid use")]
+        //public static async Task<IEnumerable<T>> OrderByAsync<T>(this Task<IEnumerable<T>> source, Func<T, object> orderer)
+        //{
+        //    var enumerable = await source;
+        //    return enumerable.OrderBy(orderer);
+        //}
     }
 }
