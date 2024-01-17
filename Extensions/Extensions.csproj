@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;netstandard2.0;</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;netstandard2.0;</TargetFrameworks>
     <AssemblyName>PolyhydraGames.Extensions</AssemblyName>
     <RootNamespace>PolyhydraGames.Extensions</RootNamespace>
     <ReleaseVersion>2.1.0.8</ReleaseVersion>
@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include=".nuget\" />
+    <None Include="..\nuget\PolyhydraGames.Extensions.nuspec" Link=".nuget\PolyhydraGames.Extensions.nuspec" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\nuget\PolyhydraGames.Extensions.nuspec" Link=".nuget\PolyhydraGames.Extensions.nuspec" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
