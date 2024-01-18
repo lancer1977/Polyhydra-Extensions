@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace PolyhydraGames.Extensions
+namespace PolyhydraGames.Extensions.Serialization
 {
-    public static class XmlExtensions
+    public static class XElementExtensions
     {
         public static bool Contains(this XAttribute attribute, string value)
         {

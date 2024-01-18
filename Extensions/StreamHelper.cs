@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace PolyhydraGames.Pathfinder.Helpers
+namespace PolyhydraGames.Extensions
 {
     public static class StreamHelper
     {
