@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using PolyhydraGames.Extensions;
 
-namespace PolyhydraGames.Spotify.Test;
+namespace Extensions.Test1;
 
 public class ExtensionTests
 {
