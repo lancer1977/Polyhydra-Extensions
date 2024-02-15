@@ -106,7 +106,7 @@ namespace PolyhydraGames.Extensions
         public static string[] ToSortedArray(this IEnumerable<string> items)
         {
             var returnItems = items.ToArray();
-            Array.Sort(returnItems, StringComparer.CurrentCulture);
+            Array.Sort(returnItems, StringComparer.InvariantCulture);
             return returnItems;
         }
         public static void AddUnique<T>(this List<T> list, T item)
