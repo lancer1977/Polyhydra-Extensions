@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace PolyhydraGames.Extensions
 {
-
     public static class ObjectExtensions
     {
         public static T Clone<T>(this object source)
