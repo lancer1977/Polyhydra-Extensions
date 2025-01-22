@@ -252,7 +252,7 @@ namespace PolyhydraGames.Extensions
                     ? aString[x] + " "
                     : aString[x].ToString();
             }
-            newString += aString[aString.Length - 1];
+            newString += aString[^1];
             return newString;
         }
 
