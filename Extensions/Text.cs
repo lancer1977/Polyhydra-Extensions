@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -209,7 +210,7 @@ namespace PolyhydraGames.Extensions
                 : aryArray.Select(item => item.Key + mergevalue + item.Value).ToArray();
         }
 
-        public static string ToCodedArrayWithSpace<T>(this IEnumerable<T> aryArray, string store = "#")
+        public static string ToCodedArrayWithSpace<T>(this IEnumerable<T>? aryArray, string store = "#")
         {
             if (aryArray == null) return "";
             var items = aryArray.ToArray();
@@ -219,9 +220,25 @@ namespace PolyhydraGames.Extensions
                 : "";
         }
 
-        public static string InsSpace(this string aString)
+        public static string InsSpace(this string? aString)
         {
-            return !(aString.Length > 2) ? aString : aString[0] + Regex.Replace(aString.Substring(1), "[A-Z]", " $&");
+            if (aString == null) return string.Empty;
+            if(aString is not { Length: > 1 })
+                return aString;
+
+            var result = new StringBuilder();
+            result.Append(aString[0]);  // Add the first character directly
+
+            for (int i = 1; i < aString.Length; i++)
+            {
+                if (char.IsUpper(aString[i]))
+                {
+                    result.Append(' ');  // Add a space before the uppercase letter
+                }
+                result.Append(aString[i]);
+            }
+
+            return result.ToString();
         }
 
         public static string InsSpaceBeforeInt(this string aString)

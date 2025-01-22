@@ -7,8 +7,6 @@ namespace PolyhydraGames.Extensions
 
     public static class EnumExtensions
     {
-
-
         public static T ToEnum<T>(this Enum value)
         {
             var converted = value.ToString();
@@ -16,15 +14,11 @@ namespace PolyhydraGames.Extensions
                        ? (T)Enum.ToObject(typeof(T), value)
                        : (T)Enum.ToObject(typeof(T), 0);
         }
-
         public static T ToEnum<T>(this int value)
         {
             return (T)Enum.ToObject(typeof(T), value);
             //: (T)Enum.ToObject(typeof(T), 0);
         }
-
-
-
         public static T ToEnum<T>(this string value) where T : struct
         {
             var outVal = default(T);
@@ -38,8 +32,6 @@ namespace PolyhydraGames.Extensions
             Enum.TryParse(value.ToEnumNormalized(), true, out outVal);
             return outVal;
         }
-
-
         public static bool EnumStringCompare<T>(T enumItem, string value)
         {
             var normalized2 = enumItem.ToString().ToEnumNormalized();
@@ -76,8 +68,7 @@ namespace PolyhydraGames.Extensions
 
         public static string[] EnumToArray<T>(this IEnumerable<T> sAlign, bool insertSpaces = true) where T : struct
         {
-            var outList = (from item in sAlign
-                           select (insertSpaces ? item.ToString().InsSpace() : item.ToString())).ToArray();
+            var outList = (from item in sAlign select (insertSpaces ? item.ToString().InsSpace() : item.ToString())).ToArray();
             return outList;
         }
         public static List<string> EnumToList<T>(this IEnumerable<T> sAlign, bool insertSpaces = true) where T : struct

@@ -85,7 +85,15 @@ public class HtmlStyleHelpersTests
         // Assert
         Assert.That("display:none;" == result);
     }
+
+    [TestCase("HelloIAmText", ExpectedResult = "Hello I Am Text")]
+    [TestCase("", ExpectedResult = "")]
+    [TestCase("A", ExpectedResult = "A")]
+    [TestCase("AB", ExpectedResult = "A B")]
+    [TestCase(null, ExpectedResult = null)]
+    public string? Show_ShouldReturnDisplayNoneIfFalse(string? input) => input.InsSpace();
 }
+ 
 [TestFixture]
 public class HttpEncodingTests
 {
