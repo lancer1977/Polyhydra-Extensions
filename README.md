@@ -2,7 +2,7 @@
 
 Polyhydra-Extensions is a **NuGet library** providing a collection of **C# extension methods** to simplify common programming tasks, including text manipulation, collections, enums, and more.
 
-[![NuGet Badge](https://img.shields.io/nuget/v/Polyhydra-Extensions.svg)](https://www.nuget.org/packages/PolyhydraGames.Extensions)
+[![NuGet Badge](https://img.shields.io/nuget/v/PolyhydraGames.Extensions.svg)](https://www.nuget.org/packages/PolyhydraGames.Extensions)
 
 ## Features
 
