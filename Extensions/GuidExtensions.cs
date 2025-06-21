@@ -9,6 +9,10 @@ namespace PolyhydraGames.Extensions
         {
             return guid == Guid.Empty;
         }
+        public static bool IsNew(this Guid? guid)
+        {
+            return guid == null || guid == Guid.Empty;
+        }
         
         public static bool IsGuid(this string value)
         {
