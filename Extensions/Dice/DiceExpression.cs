@@ -1,7 +1,6 @@
-﻿namespace PolyhydraGames.Extensions.Dice
+﻿namespace PolyhydraGames.Extensions.Dice;
+
+public struct DiceExpression
 {
-    public struct DiceExpression
-    {
-        public string Value;
-    }
+    public string Value;
 }

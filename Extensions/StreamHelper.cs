@@ -1,17 +1,16 @@
 using System.IO;
 
-namespace PolyhydraGames.Extensions
+namespace PolyhydraGames.Extensions;
+
+public static class StreamHelper
 {
-    public static class StreamHelper
+    public static Stream ToStream(this string str)
     {
-        public static Stream ToStream(this string str)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(str);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
+        var stream = new MemoryStream();
+        var writer = new StreamWriter(stream);
+        writer.Write(str);
+        writer.Flush();
+        stream.Position = 0;
+        return stream;
     }
 }

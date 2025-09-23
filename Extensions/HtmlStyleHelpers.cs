@@ -1,8 +1,6 @@
-namespace PolyhydraGames.Extensions
-{
-    public static class HtmlStyleHelpers
-    {
-        public static string Show(bool b) => b ? "" : "display:none;";
-    }
-}
+namespace PolyhydraGames.Extensions;
 
+public static class HtmlStyleHelpers
+{
+    public static string Show(bool b) => b ? "" : "display:none;";
+}

@@ -2,34 +2,33 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace PolyhydraGames.Extensions
+namespace PolyhydraGames.Extensions;
+
+public static class TryHelpers
 {
-    public static class TryHelpers
+    public static async Task Try(this Task func)
     {
-        public static async Task Try(this Task func)
+        try
         {
-            try
-            {
-                await func;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            await func;
         }
-        public static async Task<T> Try<T>(this Task<T> func)
+        catch (Exception ex)
         {
-            try
-            {
-                return await func;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            return default(T);
+            Debug.WriteLine(ex.Message);
         }
-
     }
+    public static async Task<T> Try<T>(this Task<T> func)
+    {
+        try
+        {
+            return await func;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+        return default(T);
+    }
+
 }

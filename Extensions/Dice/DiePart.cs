@@ -1,8 +1,7 @@
-﻿namespace PolyhydraGames.Extensions.Dice
+﻿namespace PolyhydraGames.Extensions.Dice;
+
+public struct DiePart
 {
-    public struct DiePart
-    {
-        public bool Negative;
-        public string Die;
-    }
+    public bool Negative;
+    public string Die;
 }

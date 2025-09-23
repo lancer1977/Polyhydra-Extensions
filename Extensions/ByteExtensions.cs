@@ -1,8 +1,7 @@
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace PolyhydraGames.Extensions
-{
+namespace PolyhydraGames.Extensions;
 //LEAVE ALONE!
 #if NETSTANDARD2_0
     public static class ByteExtensions
@@ -68,4 +67,3 @@ namespace PolyhydraGames.Extensions
         }
     }
 #endif
-}
