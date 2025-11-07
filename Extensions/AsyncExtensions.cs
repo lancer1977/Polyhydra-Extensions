@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace PolyhydraGames.Extensions;
 
 public static class AsyncExtensions
@@ -24,8 +25,9 @@ public static class AsyncExtensions
     /// <typeparam name="T2">Get Resource</typeparam>
     /// <param name="clientTask">Function to grab the dependency</param>
     /// <param name="func">behavior to run</param>
+    /// <param name="onError">Callback for exceptions</param>
     /// <returns></returns>
-    public static async Task RunWithLog<T>(this Task<T> clientTask, Func<T, Task> func)
+    public static async Task RunWithLog<T>(this Task<T> clientTask, Func<T, Task> func, Action<Exception>? onError = null)
     {
         try
         {
@@ -35,6 +37,7 @@ public static class AsyncExtensions
         catch (Exception ex)
         {
             Log.LogCritical(ex, ex.Message);
+            onError?.Invoke(ex);
             throw;
         }
 
@@ -49,7 +52,7 @@ public static class AsyncExtensions
     /// <param name="clientTask">Function to grab the dependency</param>
     /// <param name="func">behavior to run</param>
     /// <returns></returns>
-    public static async Task<TResult> RunWithLog<TResult, T>(this Task<T> clientTask, Func<T, Task<TResult>> func)
+    public static async Task<TResult> RunWithLog<TResult, T>(this Task<T> clientTask, Func<T, Task<TResult>> func, Action<Exception>? onError = null)
     {
         try
         {
@@ -59,6 +62,7 @@ public static class AsyncExtensions
         catch (Exception ex)
         {
             Log.LogCritical(ex, ex.GetMessages());
+            onError?.Invoke(ex);
             throw;
         }
     }
