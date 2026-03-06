@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        dotnet: ['8.0', '9.0']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
+    
+    - name: Restore
+      run: dotnet restore Extensions/Extensions.sln
+    
+    - name: Build
+      run: dotnet build Extensions/Extensions.csproj -c Release --no-restore
+    
+    - name: Test
+      run: dotnet test Extensions.Test1/Extensions.Test1.csproj -c Release --no-build --verbosity normal
+    
+    - name: Pack
+      run: dotnet pack Extensions/Extensions.csproj -c Release --no-build -o ./artifacts
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages-${{ matrix.dotnet }}
+        path: artifacts/*.nupkg
