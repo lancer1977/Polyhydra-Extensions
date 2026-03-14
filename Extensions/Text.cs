@@ -222,7 +222,7 @@ public static partial class Text
 
     public static string InsSpace(this string? aString)
     {
-        if (aString == null) return string.Empty;
+        if (aString == null) return null!;
         if(aString is not { Length: > 1 })
             return aString;
 
