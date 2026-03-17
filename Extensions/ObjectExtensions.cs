@@ -12,32 +12,34 @@ public static class ObjectExtensions
         returnObject.CopySharedProperties(source);
         return returnObject;
     }
+
     public static async Task RunAsync<T>(this T item, Action<T> action) where T : class
     {
-        if (item != null)
+        if (item is not null)
         {
             await Task.Run(() => action(item));
         }
     }
 
-    /// <summary> copy base class instance's property values to this object. </summary>
+    /// <summary>Copy base class instance's property values to this object.</summary>
     public static void CopySharedProperties(this object target, object source)
     {
-        if (target == null) throw new NullReferenceException(nameof(target));
-        if (source == null) return;
+        ArgumentNullException.ThrowIfNull(target);
+        if (source is null) return;
+
         var targetProperties = target.GetType().GetProperties().Where(i => i.CanWrite).ToArray();
         var sourceProperties = source.GetType().GetProperties();
+
         foreach (var propertyInfo in sourceProperties)
         {
             var prop = targetProperties.FirstOrDefault(i => i.Name == propertyInfo.Name);
 
-            if (prop != null && prop.PropertyType == propertyInfo.PropertyType)
+            if (prop is not null && prop.PropertyType == propertyInfo.PropertyType)
             {
                 var value = propertyInfo.GetValue(source, null);
-                if (null != value) prop.SetValue(target, value, null);
+                if (value is not null)
+                    prop.SetValue(target, value, null);
             }
-
         }
     }
-
 }
