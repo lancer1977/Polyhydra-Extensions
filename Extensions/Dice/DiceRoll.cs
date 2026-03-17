@@ -24,7 +24,7 @@ public static class DiceRoll
     /// </summary>
     /// <param name="dice">The dice.</param>
     /// <returns></returns>
-    private static int DieMin(this string dice)
+    public static int DieMin(this string dice)
     {
         if (string.IsNullOrEmpty(dice)) return 0;
         dice = dice.ToLower();
