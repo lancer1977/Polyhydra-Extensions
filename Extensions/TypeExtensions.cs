@@ -67,7 +67,7 @@ public static class TypeExtensions
     }
         
     /// <summary>
-    /// Exculudes types provided
+    /// Excludes types provided
     /// </summary>
     /// <param name="types"></param>
     /// <param name="except"></param>

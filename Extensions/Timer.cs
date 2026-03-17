@@ -1,5 +1,3 @@
-using System;
-
 namespace PolyhydraGames.Extensions;
 
 public class Timer
@@ -8,10 +6,6 @@ public class Timer
     private DateTime CurrentTime { get; set; }
     private DateTime HoldTime { get; set; }
     public int Ticks { get; private set; }
-    public Timer()
-    {
-          
-    }
 
     public void Start()
     {
@@ -25,9 +19,9 @@ public class Timer
         Ticks += 1;
         return Ticks;
     }
+
     public string TimeStamp()
     {
-          
         HoldTime = CurrentTime;
         CurrentTime = DateTime.Now;
         var span = (CurrentTime - HoldTime).Milliseconds;

@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SpotifyAPI.Web;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 namespace PolyhydraGames.Extensions;
 
 public static class AsyncExtensions
