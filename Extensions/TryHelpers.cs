@@ -17,7 +17,8 @@ public static class TryHelpers
             Debug.WriteLine(ex.Message);
         }
     }
-    public static async Task<T> Try<T>(this Task<T> func)
+
+    public static async Task<T?> Try<T>(this Task<T> func)
     {
         try
         {
@@ -28,7 +29,6 @@ public static class TryHelpers
             Debug.WriteLine(ex.Message);
         }
 
-        return default(T);
+        return default;
     }
-
 }
