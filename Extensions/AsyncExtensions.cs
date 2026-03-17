@@ -27,14 +27,20 @@ public static class AsyncExtensions
     /// </summary>
     private static bool IsRetryable(Exception ex)
     {
-        return ex switch
+        // Check for SpotifyAPI.Web exception types (v7.0+)
+        if (ex.GetType().Name is "APIException" or "TooManyRequestsException" or "UnauthorizedException" or "NotFoundException" or "BadRequestException")
         {
-            APITooManyRequestsException => true, // 429
-            APIUnauthorizedException => false,    // 401 - auth issue, don't retry
-            APINotFoundException => false,        // 404 - resource doesn't exist
-            APIBadRequestException => false,      // 400 - bad request
-            _ => ex.Message.Contains("5") || ex.Message.Contains("502") || ex.Message.Contains("503") || ex.Message.Contains("504")
-        };
+            return ex.GetType().Name switch
+            {
+                "TooManyRequestsException" => true,  // 429
+                "UnauthorizedException" => false,    // 401 - auth issue
+                "NotFoundException" => false,        // 404 - resource doesn't exist
+                "BadRequestException" => false,       // 400 - bad request
+                _ => true // APIException base class
+            };
+        }
+        // Fallback for other exception types - check message for server errors
+        return ex.Message.Contains("5") || ex.Message.Contains("502") || ex.Message.Contains("503") || ex.Message.Contains("504");
     }
 
     /// <summary>
@@ -42,9 +48,11 @@ public static class AsyncExtensions
     /// </summary>
     private static TimeSpan GetRetryDelay(Exception ex)
     {
-        if (ex is APITooManyRequestsException rateLimitEx)
+        // Try to find RetryAfter property (present in TooManyRequestsException)
+        var retryAfterProp = ex.GetType().GetProperty("RetryAfter");
+        if (retryAfterProp != null && retryAfterProp.GetValue(ex) is TimeSpan ts)
         {
-            return rateLimitEx.RetryAfter;
+            return ts;
         }
         return TimeSpan.FromMilliseconds(BaseDelayMs);
     }
