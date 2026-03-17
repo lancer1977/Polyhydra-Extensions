@@ -1,3 +1,5 @@
+using System;
+
 namespace PolyhydraGames.Extensions;
 
 public static class NumericExtensions
