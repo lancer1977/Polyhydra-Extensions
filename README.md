@@ -27,3 +27,8 @@ See [docs/README.md](docs/README.md) for detailed onboarding documentation.
 
 ## Packages
 [![NuGet](https://img.shields.io/nuget/v/PolyhydraGames.Extensions.svg)](https://www.nuget.org/packages/PolyhydraGames.Extensions/)
+
+## 📖 Documentation
+Detailed documentation can be found in the following sections:
+- [Feature Index](./docs/features/README.md)
+- [Core Capabilities](./docs/features/core-capabilities.md)
