@@ -1,3 +1,6 @@
 .vs/
 Extensions/obj/
 Extensions.Test1/obj/
+
+# Codex workspace state
+.codex
