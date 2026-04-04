@@ -11,6 +11,20 @@ public static class Collections
 {
     private static readonly Random _random = new();
 
+    public static void Each<T>(this IEnumerable<T> items, Action<T> action)
+    {
+        ForEach(items, action);
+    }
+
+    public static T FirstOr<T>(this IEnumerable<T> items, T defaultValue)
+    {
+        if (items is null)
+            return defaultValue;
+
+        using var enumerator = items.GetEnumerator();
+        return enumerator.MoveNext() ? enumerator.Current : defaultValue;
+    }
+
     public static void Shuffle<T>(this IList<T> list)
     {
         for (int i = 0; i < list.Count; i++)

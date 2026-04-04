@@ -1,19 +1,18 @@
 using System;
+using System.Diagnostics;
 
 namespace PolyhydraGames.Extensions;
 
 public class Timer
 {
-    private DateTime StartTime { get; set; }
-    private DateTime CurrentTime { get; set; }
-    private DateTime HoldTime { get; set; }
+    private readonly Stopwatch _stopwatch = Stopwatch.StartNew();
     public int Ticks { get; private set; }
+    public long ElapsedMilliseconds => _stopwatch.ElapsedMilliseconds;
 
     public void Start()
     {
-        StartTime = DateTime.Now;
-        CurrentTime = DateTime.Now;
-        HoldTime = DateTime.Now;
+        Ticks = 0;
+        _stopwatch.Restart();
     }
 
     public int Tick()
@@ -22,14 +21,26 @@ public class Timer
         return Ticks;
     }
 
+    public void Pause()
+    {
+        _stopwatch.Stop();
+    }
+
+    public void Resume()
+    {
+        _stopwatch.Start();
+    }
+
+    public void Stop()
+    {
+        _stopwatch.Stop();
+    }
+
     public string TimeStamp()
     {
-        HoldTime = CurrentTime;
-        CurrentTime = DateTime.Now;
-        var span = (CurrentTime - HoldTime).Milliseconds;
-        var totalSpan = "Average = " + ((CurrentTime - StartTime).Milliseconds / Ticks);
-        return "Average" + totalSpan +
-               "\nTimeSpan=" + span;
+        var elapsed = _stopwatch.Elapsed;
+        var average = Ticks > 0 ? elapsed.TotalMilliseconds / Ticks : elapsed.TotalMilliseconds;
+        return $"Average = {average:0.##}\nTimeSpan={elapsed.TotalMilliseconds:0.##}";
     }
 }
 //public class MethodTimer: Timer

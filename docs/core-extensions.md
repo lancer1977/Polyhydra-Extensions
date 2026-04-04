@@ -52,4 +52,4 @@ Common consumers:
 
 ## Status
 
-✅ **Working** — Stable, no known issues.
+✅ **Working** — Verified by the current test suite; legacy helper gaps and dice/timer inconsistencies have been corrected.

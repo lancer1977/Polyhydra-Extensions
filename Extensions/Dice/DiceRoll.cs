@@ -13,8 +13,8 @@ public static class DiceRoll
             throw new InvalidOperationException($"INVALID Clamp!  sides {sides}, min {min}, max {max}");
         while (true)
         {
-            var dieRoll = DiceRoll.RollDie(max);
-            if (sides > max || sides < min) continue;
+            var dieRoll = DiceRoll.RollDie(sides);
+            if (dieRoll > max || dieRoll < min) continue;
             return dieRoll;
         }
     }
@@ -39,63 +39,38 @@ public static class DiceRoll
     /// <returns></returns>
     public static List<int> RollDiceWithResults(string dice, out int result)
     {
-          
         var diceResults = new List<int>();
-         
         if (string.IsNullOrEmpty(dice))
         {
             result = 0;
             return diceResults;
         }
-        foreach (var item in dice.Split('+'))
-            diceResults.AddRange(ParseDiceInts(item));
-        result = diceResults.Sum();
-        return diceResults;
-    }
-    /// <summary>
-    /// Parses the dice ints.
-    /// </summary>
-    /// <param name="dice">The dice.</param>
-    /// <returns></returns>
-    private static IEnumerable<int> ParseDiceInts(string dice)
-    {
+        foreach (var item in dice.ToDieParts())
+        {
+            if (string.IsNullOrWhiteSpace(item.Die))
+                continue;
 
-        var dicePool = new List<int>();
-        if (string.IsNullOrEmpty(dice))
-        {
-            return dicePool;
-        }
-        dice = dice.ToLower();
-        if (dice.Contains("d") == false) dicePool.Add(dice.ToInt());
-        else
-        {
-            var split = dice.Split('d');
-            if (split.Length < 2) return null;
+            if (!item.Die.Contains("d", StringComparison.OrdinalIgnoreCase))
+            {
+                var value = item.Die.ToInt();
+                diceResults.Add(item.Negative ? -value : value);
+                continue;
+            }
+
+            var split = item.Die.ToLower().Split('d');
             var number = split[0].ToInt();
             var type = split[1].ToInt();
             for (var x = 0; x < number; x++)
-                dicePool.Add(D(type).Invoke());
+            {
+                var roll = RollRandom(1, type);
+                diceResults.Add(item.Negative ? -roll : roll);
+            }
         }
-        return dicePool;
+        result = diceResults.Sum();
+        return diceResults;
     }
 
 
-    //public static IEnumerable<Func<int>> ParseDice(string dice)
-    //{
-    //    var dicePool = new List<Func<int>>();
-    //    dice = dice.ToLower();
-    //    if (dice.Contains("d") == false) dicePool.Add(PlainNumber(dice));
-    //    else
-    //    {
-    //        string[] split = dice.Split('d');
-    //        if (split.Length < 2) return null;
-    //        int number = split[0].ToInt();
-    //        int type = split[1].ToInt();
-    //        for (int x = 0; x < number; x++)
-    //            dicePool.Add(D(type));
-    //    }
-    //    return dicePool;
-    //}
     private static Func<int> D(int sides)
     {
         return () => RollRandom(1, sides);
@@ -187,33 +162,25 @@ public static class DiceRoll
     public static int RollDice(string dice)
     {
         if (string.IsNullOrEmpty(dice)) return 0;
-        var dicePool = dice.Split('+');
-        Debug.WriteLine(dicePool.ToCodedArray());
-        return dicePool.Sum(item => RollNDie(item));
+        var dicePool = dice.ToDieParts();
+        Debug.WriteLine(dicePool.Select(i => $"{(i.Negative ? "-" : "+")}{i.Die}").ToCodedArray());
+        return dicePool.Result(out _);
     }
 
     public static int RollDiceMax(string dice)
     {
         if (string.IsNullOrEmpty(dice)) return 0;
-        if (dice.Contains("+"))
-        {
-            var dicePool = dice.Split('+');
-            Debug.WriteLine(dicePool.ToCodedArray());
-            return dicePool.Sum(item => DieMax(item));
-        }
-        return DieMax(dice);
+        var dicePool = dice.ToDieParts();
+        return dicePool.Sum(item => item.Negative ? -DieMax(item.Die) : DieMax(item.Die));
     }
 
     public static int RollDiceMin(string dice)
     {
         if (string.IsNullOrEmpty(dice)) return 0;
-        if (dice.Contains("+"))
-        {
-            var dicePool = dice.Split('+');
-            Debug.WriteLine(dicePool.ToCodedArray());
-            return dicePool.Sum(item => DieMin(item));
-        }
-        return DieMin(dice);
+        var dicePool = dice.ToDieParts();
+        return dicePool.Sum(item => item.Negative
+            ? -(item.Die.Contains("d", StringComparison.OrdinalIgnoreCase) ? DieMin(item.Die) : item.Die.ToInt())
+            : (item.Die.Contains("d", StringComparison.OrdinalIgnoreCase) ? DieMin(item.Die) : item.Die.ToInt()));
     }
 
     /// <summary>

@@ -244,16 +244,16 @@ public static partial class Text
     public static string InsSpaceBeforeInt(this string aString)
     {
         if (string.IsNullOrEmpty(aString)) return "";
-        if (!(aString.Length > 2)) return aString;
-        var newString = "";
-        for (var x = 0; x <= aString.Length; x++)
+        if (aString.Length < 2) return aString;
+
+        var newString = new StringBuilder();
+        for (var x = 0; x < aString.Length; x++)
         {
-            newString += (char.IsLower(aString[x]) && char.IsNumber(aString[x + 1]))
-                ? aString[x] + " "
-                : aString[x].ToString();
+            newString.Append(aString[x]);
+            if (x < aString.Length - 1 && char.IsLower(aString[x]) && char.IsNumber(aString[x + 1]))
+                newString.Append(' ');
         }
-        newString += aString[^1];
-        return newString;
+        return newString.ToString();
     }
 
     public static string VbMe(this string input)

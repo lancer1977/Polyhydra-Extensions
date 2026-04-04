@@ -35,4 +35,28 @@ public static class TaskExtensions
             }
         });
     }
+
+    public static async Task WithTimeout(this Task task, int timeoutMilliseconds)
+    {
+        if (task is null) throw new ArgumentNullException(nameof(task));
+
+        var delayTask = Task.Delay(timeoutMilliseconds);
+        var completed = await Task.WhenAny(task, delayTask).ConfigureAwait(false);
+        if (completed == delayTask)
+            throw new TimeoutException($"The task did not complete within {timeoutMilliseconds}ms.");
+
+        await task.ConfigureAwait(false);
+    }
+
+    public static async Task<T> WithTimeout<T>(this Task<T> task, int timeoutMilliseconds)
+    {
+        if (task is null) throw new ArgumentNullException(nameof(task));
+
+        var delayTask = Task.Delay(timeoutMilliseconds);
+        var completed = await Task.WhenAny(task, delayTask).ConfigureAwait(false);
+        if (completed == delayTask)
+            throw new TimeoutException($"The task did not complete within {timeoutMilliseconds}ms.");
+
+        return await task.ConfigureAwait(false);
+    }
 }

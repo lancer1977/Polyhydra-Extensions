@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,13 @@ public static class AsyncExtensions
         return enumerable.DistinctBy(orderer);
     }
 #endif
-    public static ILogger Log { get; set; }
+    public static ILogger Log { get; set; } = NullLogger.Instance;
+
+    public static async Task<T[]> WhenAll<T>(this IEnumerable<Task<T>> tasks)
+    {
+        if (tasks is null) throw new ArgumentNullException(nameof(tasks));
+        return await Task.WhenAll(tasks).ConfigureAwait(false);
+    }
 
     /// <summary>
     /// Determines if an exception is retryable (rate limit or server error)

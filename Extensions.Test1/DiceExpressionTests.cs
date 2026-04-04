@@ -79,6 +79,16 @@ public class DiceExpressionTests
     }
 
     [Test]
+    public void DiceExpression_Parse_And_Roll_Works()
+    {
+        var expression = DiceExpression.Parse("2d6+3");
+        var result = expression.Roll();
+
+        Assert.That(result, Is.GreaterThanOrEqualTo(5));
+        Assert.That(result, Is.LessThanOrEqualTo(15));
+    }
+
+    [Test]
     public void RollDice_WithZeroModifier_ReturnsBaseRoll()
     {
         // Arrange & Act
@@ -261,12 +271,11 @@ public class DiceExpressionTests
     public void RollDiceMin_With1d6Plus3_Returns1()
     {
         // Arrange & Act
-        // DieMin("1d6") = 1 (die count), DieMin("3") = 0 (no "d" present)
-        // This is a known quirk — RollDiceMin returns die counts, not minimum roll values
+        // RollDiceMin now returns the minimum possible total for the full expression.
         var result = DiceRoll.RollDiceMin("1d6+3");
         
-        // Assert - matches actual implementation behavior
-        Assert.That(result, Is.EqualTo(1));
+        // Assert - 1d6 minimum is 1, plus 3 = 4
+        Assert.That(result, Is.EqualTo(4));
     }
 
     #endregion

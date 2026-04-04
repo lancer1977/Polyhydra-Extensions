@@ -7,6 +7,6 @@ public static class Guard
 {
     public static void AgainstNull<T>(T? value, [CallerMemberName] string name = "")
     {
-        if (value is null) throw new ArgumentNullException($"{name} had an illegal null.");
+        if (value is null) throw new ArgumentNullException(name, $"{name} had an illegal null.");
     }
 }

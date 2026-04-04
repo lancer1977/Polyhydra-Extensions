@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.ExceptionServices;
 using Microsoft.Extensions.Logging;
 
 namespace PolyhydraGames.Extensions;
@@ -16,14 +17,16 @@ public static class LogExtensions
     public static T LogAndThrow<T>(this ILogger logger, Exception ex)
     {
         logger.LogError(ex, ex.Message);
-        throw ex;
+        ExceptionDispatchInfo.Capture(ex).Throw();
+        return default!;
     }
 
     public static T LogAndThrow<T>(this ILogger logger, string message)
     {
         var exception = new Exception(message);
         logger.LogError(exception, message);
-        throw exception;
+        ExceptionDispatchInfo.Capture(exception).Throw();
+        return default!;
     }
 
     public static Exception LogAndThrow(this ILogger logger, Exception ex)
@@ -36,6 +39,7 @@ public static class LogExtensions
     {
         var exception = new Exception(message);
         logger.LogError(exception, message);
-        throw exception;
+        ExceptionDispatchInfo.Capture(exception).Throw();
+        return exception;
     }
 }

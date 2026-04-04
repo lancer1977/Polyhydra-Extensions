@@ -6,6 +6,25 @@ namespace PolyhydraGames.Extensions;
 
 public static class StringExtension
 {
+    public static bool IsNullOrEmpty(this string? value, bool includeWhitespace = false)
+    {
+        return includeWhitespace ? string.IsNullOrWhiteSpace(value) : string.IsNullOrEmpty(value);
+    }
+
+    public static string Truncate(this string? value, int maxLength)
+    {
+        if (string.IsNullOrEmpty(value) || maxLength <= 0)
+            return string.Empty;
+
+        if (value.Length <= maxLength)
+            return value;
+
+        const string ellipsis = "...";
+        if (maxLength <= ellipsis.Length)
+            return value[..maxLength];
+
+        return value[..(maxLength - ellipsis.Length)] + ellipsis;
+    }
 
 
     public static string ToTitleCase(this string input)
