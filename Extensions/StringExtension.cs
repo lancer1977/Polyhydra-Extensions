@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PolyhydraGames.Extensions;
 
@@ -9,6 +10,31 @@ public static class StringExtension
     public static bool IsNullOrEmpty(this string? value, bool includeWhitespace = false)
     {
         return includeWhitespace ? string.IsNullOrWhiteSpace(value) : string.IsNullOrEmpty(value);
+    }
+
+    public static bool IsUrl(this string request)
+    {
+        if (string.IsNullOrWhiteSpace(request))
+        {
+            return false;
+        }
+
+        var value = request.Trim();
+
+        // Keep scheme-based URLs permissive anywhere in the string.
+        if (Regex.IsMatch(value, @"(?i)(?:https?|ftp)://\s*\S+"))
+        {
+            return true;
+        }
+
+        // Allow bare domains when the entire value is the URL.
+        if (Regex.IsMatch(value, @"(?i)^(?:[a-z0-9-]+\.)+[a-z]{2,}(?:/\S*)?$"))
+        {
+            return true;
+        }
+
+        // Allow bare domains embedded in text only when they include a path.
+        return Regex.IsMatch(value, @"(?i)\b(?:[a-z0-9-]+\.)+[a-z]{2,}/\S+");
     }
 
     public static string Truncate(this string? value, int maxLength)

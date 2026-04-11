@@ -30,5 +30,20 @@ namespace Extensions.Test1
             Assert.That(whitespace.IsNullOrEmpty(false), Is.False);
             Assert.That(whitespace.IsNullOrEmpty(true), Is.True);
         }
+
+        [TestCase("http:// hiimacheep.com", ExpectedResult = true)]
+        [TestCase("https://hiimacheep.com", ExpectedResult = true)]
+        [TestCase("hiimacheep.com", ExpectedResult = true)]
+        [TestCase("hiimacheep.com/testyy", ExpectedResult = true)]
+        [TestCase("hiimacheep.co", ExpectedResult = true)]
+        [TestCase("dumbpeopletrap.com/scam", ExpectedResult = true)]
+        [TestCase("Cheap viewers on topgaming77a.net/hz7h", ExpectedResult = true)]
+        [TestCase("hiimacheep.co/testyy", ExpectedResult = true)]
+        [TestCase("Hi there chief. comrade beatums", ExpectedResult = false)]
+        [TestCase("Hows it going.corn today is pretty good", ExpectedResult = false)]
+        public bool IsUrl(string value)
+        {
+            return value.IsUrl();
+        }
     }
 }
