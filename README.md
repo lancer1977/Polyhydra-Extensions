@@ -4,6 +4,23 @@
 [![NuGet](https://img.shields.io/nuget/v/PolyhydraGames.Extensions.svg)](https://www.nuget.org/packages/PolyhydraGames.Extensions/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Tags
+
+- dotnet
+- core
+- core-extensions
+- docs
+- testing
+- extensions
+
+## Related Repos
+
+- [`Core`](../Core/)
+- [`Core.Models`](../Core.Models/)
+- [`Core.Interfaces`](../Core.Interfaces/)
+- [`Core.Serialization`](../Core.Serialization/)
+- [`Core.SQL`](../Core.SQL/)
+
 ## 🚀 Overview
 A comprehensive .NET extension library providing common utilities, methods, and helper types for PolyhydraGames projects. It covers areas like Async operations, Collections, Dice Expressions, Enums, GUIDs, Strings, and Time manipulation.
 
