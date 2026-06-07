@@ -1,9 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0;net9.0;</TargetFrameworks>
+		<TargetFrameworks>net8.0;net9.0</TargetFrameworks>
 		<AssemblyName>PolyhydraGames.Extensions</AssemblyName>
 		<RootNamespace>PolyhydraGames.Extensions</RootNamespace>
+		<PackageId>PolyhydraGames.Extensions</PackageId>
+		<Description>Reusable extension methods and helpers for the Polyhydra ecosystem.</Description>
+		<RepositoryUrl>https://github.com/lancer1977/Polyhydra-Extensions</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/lancer1977/Polyhydra-Extensions</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
@@ -11,6 +16,5 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.5" />
 		<PackageReference Include="SpotifyAPI.Web" Version="7.4.2" />
 	</ItemGroup>
-
  
 </Project>

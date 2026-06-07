@@ -15,7 +15,7 @@
 | Module | Purpose |
 |--------|---------|
 | `EnumExtensions` | `ToEnum<T>` conversions, int/string → enum |
-| `StringExtension` | String manipulation helpers |
+| `StringExtension` | String manipulation helpers, URL detection, text slicing |
 | `IocExtensions` | DI helpers (`ThatImplement<T>`, `ThatHaveAttribute<T>`, `CreateDefault`) |
 | `TypeExtensions` | Reflection utilities |
 | `DateExtensions` | Date/time helpers |
