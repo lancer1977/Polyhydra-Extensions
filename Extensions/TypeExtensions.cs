@@ -14,12 +14,23 @@ public static class TypeExtensions
     /// <returns></returns>
     public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
     {
-        return assembly
-            .DefinedTypes
-            //.Select(t => t.GetTypeInfo())
-            .Where(t => !t.IsAbstract)
-            .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
-            .Select(t => t.AsType());
+        try
+        {
+            return assembly
+                .DefinedTypes
+                //.Select(t => t.GetTypeInfo())
+                .Where(t => !t.IsAbstract)
+                .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))
+                .Select(t => t.AsType());
+        }
+        catch (ReflectionTypeLoadException ex)
+        {
+            return ex.Types
+                .Where(t => t != null)
+                .Select(t => t!)
+                .Where(t => !t.IsAbstract)
+                .Where(t => t.GetConstructors().Any(c => !c.IsStatic && c.IsPublic));
+        }
     }
 
     /// <summary>
