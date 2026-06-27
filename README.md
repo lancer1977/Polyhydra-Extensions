@@ -51,9 +51,21 @@ A comprehensive .NET Extension Library. Extensions are designed to be "pure" fun
 git clone git@github.com:lancer1977/Polyhydra-Extensions.git
 cd Polyhydra-Extensions
 
-# Restore NuGet packages (likely managed via global build properties and solution file)
-dotnet restore
+# Restore NuGet packages
+dotnet restore Extensions.sln
 ```
+
+## Validation
+
+Use the solution-level test command as the native validation path:
+
+```bash
+dotnet test Extensions.sln --configuration Release --verbosity minimal
+dotnet pack Extensions/Extensions.csproj --configuration Release --output ./artifacts
+dotnet list Extensions.sln package --outdated
+```
+
+The dependency audit is currently clean against the configured NuGet sources. CI now runs the real `PolyhydraGames.Extensions.Tests` project before packing artifacts.
 
 ## 📖 Usage & Education
 ```csharp
@@ -75,7 +87,7 @@ Refer to the detailed documentation for specific extension methods and utilities
 *   **NuGet**: [PolyhydraGames.Extensions](https://www.nuget.org/packages/PolyhydraGames.Extensions/)
 
 ## 📦 Packages & Dependencies
-*   **NuGet**: `PolyhydraGames.Extensions` (Package name inferred)
+*   **NuGet**: `PolyhydraGames.Extensions`
 *   **Local Projects**: `Core.Interfaces`, `Core.Serialization` (Likely dependencies)
 
 ## 🔗 Related Projects

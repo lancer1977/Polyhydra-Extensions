@@ -29,7 +29,7 @@ jobs:
       run: dotnet build Extensions/Extensions.csproj -c Release --no-restore
 
     - name: Test
-      run: dotnet test Extensions.Test1/Extensions.Test1.csproj -c Release --verbosity normal
+      run: dotnet test PolyhydraGames.Extensions.Tests/PolyhydraGames.Extensions.Tests.csproj -c Release --verbosity normal
 
     - name: Pack
       run: dotnet pack Extensions/Extensions.csproj -c Release -o ./artifacts
